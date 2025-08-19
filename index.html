@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauren Fenne | Fantasy Author & Poet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1f2e;
+            --secondary-dark: #2d3748;
+            --accent-gold: #d4a574;
+            --accent-silver: #c9c9d3;
+            --text-light: #f7f7f9;
+            --text-muted: #a8a8b3;
+            --gradient-purple: #6b46c1;
+            --gradient-blue: #4c7ea8;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Musical note animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(107, 70, 193, 0.1) 0%, transparent 70%);
+        }
+
+        .hero::before {
+            content: '♪';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 40px;
+            color: var(--accent-gold);
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '♫';
+            position: absolute;
+            bottom: 30%;
+            right: 15%;
+            font-size: 35px;
+            color: var(--accent-silver);
+            opacity: 0.2;
+            animation: float 8s ease-in-out infinite 2s;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-silver));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .location {
+            font-size: 18px;
+            color: var(--accent-silver);
+            margin-bottom: 50px;
+        }
+
+        /* Section styling */
+        section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--accent-gold);
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '~';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 36px;
+            color: var(--accent-silver);
+            opacity: 0.5;
+        }
+
+        .section-title::before {
+            left: -50px;
+        }
+
+        .section-title::after {
+            right: -50px;
+        }
+
+        /* Books Section */
+        .books-container {
+            display: grid;
+            gap: 80px;
+        }
+
+        .trilogy-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .trilogy-title {
+            font-size: 36px;
+            color: var(--accent-silver);
+            margin-bottom: 20px;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .book-card {
+            background: rgba(45, 55, 72, 0.3);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .book-card:hover::before {
+            left: 100%;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        .book-number {
+            font-size: 14px;
+            color: var(--accent-silver);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .book-title {
+            font-size: 28px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .book-status {
+            font-size: 16px;
+            color: var(--accent-gold);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .book-blurb {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Poetry Section */
+        .poetry-book {
+            background: rgba(45, 55, 72, 0.3);
+            padding: 60px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(201, 201, 211, 0.2);
+            position: relative;
+        }
+
+        .poetry-title {
+            font-size: 36px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .poetry-description {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(76, 126, 168, 0.1));
+            border-radius: 20px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.05) 0%, transparent 70%);
+            animation: float 20s linear infinite;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+
+        .newsletter p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(212, 165, 116, 0.2);
+        }
+
+        .newsletter-form button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--gradient-purple));
+            border: none;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .about-image::after {
+            content: 'LF';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        .about-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: rgba(45, 55, 72, 0.2);
+            border-radius: 20px;
+            padding: 80px 40px;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-intro {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .contact-method {
+            padding: 30px;
+            background: rgba(26, 31, 46, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        .contact-method h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .contact-method p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact-method a {
+            color: var(--accent-silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-method a:hover {
+            color: var(--accent-gold);
+        }
+
+        .contact-form {
+            background: rgba(26, 31, 46, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .contact-form h3 {
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent-silver);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 16px;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(212, 165, 116, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--gradient-purple));
+            border: none;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--primary-dark);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--accent-silver);
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .tagline {
+                font-size: 20px;
+            }
+            
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                display: none;
+            }
+
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#poetry">Poetry</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Lauren Fenne</h1>
+            <p class="tagline">Where song becomes story, and silence speaks volumes</p>
+            <p class="location">Melbourne, Australia</p>
+        </div>
+    </section>
+
+    <section id="books">
+        <h2 class="section-title">Books</h2>
+        <div class="books-container">
+            <div class="trilogy-header">
+                <h3 class="trilogy-title">The Hymn for the Lost Trilogy</h3>
+                <p style="color: var(--text-muted); font-size: 18px; font-style: italic;">An epic fantasy where forbidden songs hold the power to reshape reality</p>
+            </div>
+            <div class="book-grid">
+                <div class="book-card">
+                    <p class="book-number">BOOK ONE</p>
+                    <h3 class="book-title">Song of the Forsaken</h3>
+                    <p class="book-status">Complete</p>
+                    <p class="book-blurb">When Lirien discovers her voice can shatter more than silence, she becomes both weapon and target in a world where the Sovereignty controls every note that can be sung. In the towers of the Lyricum, she must master forbidden harmonies while navigating deadly court politics and uncovering the truth about why music was bound eight centuries ago.</p>
+                </div>
+                <div class="book-card">
+                    <p class="book-number">BOOK TWO</p>
+                    <h3 class="book-title">Requiem for the Fallen</h3>
+                    <p class="book-status">Complete</p>
+                    <p class="book-blurb">The songs of rebellion rise across the realm as ancient prophecies awaken. While Lirien's fate hangs in the balance, new voices join the forbidden chorus. The Deep Song stirs beneath centuries of enforced silence, and those who once served the Sovereignty must choose between the world they know and the music calling from their blood.</p>
+                </div>
+                <div class="book-card">
+                    <p class="book-number">BOOK THREE</p>
+                    <h3 class="book-title">Hymn for the Lost</h3>
+                    <p class="book-status">In Progress</p>
+                    <p class="book-blurb">As war threatens to tear the realm apart, Theron leads the Alliance forces while haunted by impossible memories. The Wraiths' soundless songs grow stronger, suppressors fall silent, and the prophecy's ultimate verse awaits its singers. In the battle for Vel Adryn's gates, forbidden battle hymns rise once more, and the true nature of the Deep Song will finally be revealed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="poetry">
+        <h2 class="section-title">Poetry</h2>
+        <div class="poetry-book">
+            <h3 class="poetry-title">The Architecture of Absence</h3>
+            <p class="poetry-description">
+                A collection exploring the spaces between presence and loss, where memory builds its quiet cathedrals and love learns to speak in the language of distance.
+            </p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <p>Lauren Fenne is a fantasy author and poet based in Melbourne, Australia. Her work explores the intersection of music and magic, weaving tales where forbidden songs hold the power to reshape reality and silence speaks louder than words.</p>
+                <p>Her debut trilogy, Hymn for the Lost, follows those who dare to sing in a world where music has been weaponized and controlled. Through her poetry collection, The Architecture of Absence, she maps the emotional geography of loss, love, and the spaces between.</p>
+                <p>When not crafting worlds where song becomes rebellion, Lauren can be found exploring Melbourne's hidden laneways, always listening for the stories that hide in the quiet moments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-content">
+            <p class="contact-intro">
+                Whether you're a reader with questions, a fellow writer seeking connection, or someone interested in collaborating, I'd love to hear from you. Every message is a new verse in the ongoing song.
+            </p>
+
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+                <form onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+        <div class="newsletter-content">
+            <h2>Join the Chorus</h2>
+            <p>Subscribe for exclusive updates on new releases, behind-the-scenes glimpses into the world of Hymn for the Lost, and occasional musings on the magic of storytelling.</p>
+            <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">Goodreads</a>
+            <a href="mailto:lauren.fenne@gmail.com">Email</a>
+        </div>
+        <p>&copy; 2025 Lauren Fenne. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 14px;">Website crafted with the resonance of forbidden songs</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form handler
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Here you would typically send this to your newsletter service
+            // For now, we'll just show a success message
+            alert(`Thank you for subscribing! A welcome message will be sent to ${email}`);
+            event.target.reset();
+        }
+
+        // Contact form handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Here you would typically send this to your backend
+            // For now, we'll just show a success message
+            alert(`Thank you for your message, ${name}! I'll respond to ${email} as soon as possible.`);
+            event.target.reset();
+        }
+
+        // Add subtle scroll effect to nav
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(26, 31, 46, 0.98)';
+                nav.style.padding = '15px 40px';
+            } else {
+                nav.style.background = 'rgba(26, 31, 46, 0.95)';
+                nav.style.padding = '20px 40px';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add floating musical notes dynamically
+        function createFloatingNote() {
+            const notes = ['♪', '♫', '♬', '♭', '♮'];
+            const note = document.createElement('div');
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.position = 'fixed';
+            note.style.left = Math.random() * window.innerWidth + 'px';
+            note.style.top = window.innerHeight + 'px';
+            note.style.fontSize = Math.random() * 20 + 15 + 'px';
+            note.style.color = Math.random() > 0.5 ? 'var(--accent-gold)' : 'var(--accent-silver)';
+            note.style.opacity = '0.1';
+            note.style.pointerEvents = 'none';
+            note.style.zIndex = '0';
+            
+            document.body.appendChild(note);
+            
+            let position = window.innerHeight;
+            const speed = Math.random() * 2 + 1;
+            
+            const animate = () => {
+                position -= speed;
+                note.style.top = position + 'px';
+                note.style.transform = `translateX(${Math.sin(position * 0.01) * 30}px)`;
+                
+                if (position < -50) {
+                    document.body.removeChild(note);
+                } else {
+                    requestAnimationFrame(animate);
+                }
+            };
+            
+            requestAnimationFrame(animate);
+        }
+
+        // Create floating notes occasionally
+        setInterval(createFloatingNote, 3000);
+    </script>
+</body>
+</html>
