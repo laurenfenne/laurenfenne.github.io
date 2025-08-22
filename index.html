@@ -6,9 +6,9 @@
     <title>Lauren Fenne | Fantasy Author & Poet</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="fav.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     
     <style>
         * {
@@ -26,14 +26,78 @@
             --text-muted: #a8a8b3;
             --gradient-purple: #6b46c1;
             --gradient-blue: #4c7ea8;
+            --bg-gradient-start: #1a1f2e;
+            --bg-gradient-end: #2d3748;
+            --card-bg: rgba(45, 55, 72, 0.3);
+            --nav-bg: rgba(26, 31, 46, 0.95);
+            --nav-bg-scrolled: rgba(26, 31, 46, 0.98);
+            --border-color: rgba(212, 165, 116, 0.2);
+            --input-bg: rgba(26, 31, 46, 0.8);
+            --footer-bg: #1a1f2e;
+        }
+
+        /* Light theme */
+        [data-theme="light"] {
+            --primary-dark: #f7f3ed;
+            --secondary-dark: #fff9f0;
+            --accent-gold: #b8824a;
+            --accent-silver: #6b6b7d;
+            --text-light: #2d3748;
+            --text-muted: #5a5a6b;
+            --gradient-purple: #9b7dd4;
+            --gradient-blue: #7ca3c8;
+            --bg-gradient-start: #f7f3ed;
+            --bg-gradient-end: #fff9f0;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --nav-bg: rgba(247, 243, 237, 0.95);
+            --nav-bg-scrolled: rgba(247, 243, 237, 0.98);
+            --border-color: rgba(184, 130, 74, 0.2);
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --footer-bg: #ede7dd;
         }
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-dark);  /* Always dark background */
+            border: 2px solid var(--accent-silver);
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: #1a1f2e;  /* Keep dark background even in light mode */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent-gold);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
         }
 
         /* Musical note animation */
@@ -53,7 +117,7 @@
             top: 0;
             width: 100%;
             padding: 20px 40px;
-            background: rgba(26, 31, 46, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
@@ -211,12 +275,12 @@
         }
 
         .book-card {
-            background: rgba(45, 55, 72, 0.3);
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 10px;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid rgba(212, 165, 116, 0.2);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -271,11 +335,11 @@
 
         /* Poetry Section */
         .poetry-book {
-            background: rgba(45, 55, 72, 0.3);
+            background: var(--card-bg);
             padding: 60px;
             border-radius: 10px;
             text-align: center;
-            border: 1px solid rgba(201, 201, 211, 0.2);
+            border: 1px solid var(--border-color);
             position: relative;
         }
 
@@ -347,8 +411,8 @@
             flex: 1;
             min-width: 250px;
             padding: 15px 20px;
-            background: rgba(26, 31, 46, 0.8);
-            border: 1px solid rgba(212, 165, 116, 0.3);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             color: var(--text-light);
             font-size: 16px;
@@ -366,7 +430,7 @@
             background: linear-gradient(135deg, var(--accent-gold), var(--gradient-purple));
             border: none;
             border-radius: 5px;
-            color: var(--text-light);
+            color: white;
             font-size: 16px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -403,7 +467,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 72px;
-            color: var(--text-light);
+            color: white;
             font-weight: bold;
         }
 
@@ -419,7 +483,7 @@
 
         /* Contact Section */
         .contact {
-            background: rgba(45, 55, 72, 0.2);
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 80px 40px;
         }
@@ -437,54 +501,11 @@
             line-height: 1.8;
         }
 
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .contact-method {
-            padding: 30px;
-            background: rgba(26, 31, 46, 0.5);
-            border-radius: 10px;
-            border: 1px solid rgba(212, 165, 116, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .contact-method:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
-        }
-
-        .contact-method h3 {
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .contact-method p {
-            color: var(--text-muted);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .contact-method a {
-            color: var(--accent-silver);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-method a:hover {
-            color: var(--accent-gold);
-        }
-
         .contact-form {
-            background: rgba(26, 31, 46, 0.5);
+            background: var(--input-bg);
             padding: 40px;
             border-radius: 10px;
-            border: 1px solid rgba(212, 165, 116, 0.2);
+            border: 1px solid var(--border-color);
         }
 
         .contact-form h3 {
@@ -509,8 +530,8 @@
         .form-group textarea {
             width: 100%;
             padding: 15px;
-            background: rgba(26, 31, 46, 0.8);
-            border: 1px solid rgba(212, 165, 116, 0.3);
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             color: var(--text-light);
             font-size: 16px;
@@ -536,7 +557,7 @@
             background: linear-gradient(135deg, var(--accent-gold), var(--gradient-purple));
             border: none;
             border-radius: 5px;
-            color: var(--text-light);
+            color: white;
             font-size: 18px;
             font-weight: bold;
             letter-spacing: 1px;
@@ -553,9 +574,10 @@
         footer {
             text-align: center;
             padding: 40px;
-            background: var(--primary-dark);
+            background: var(--footer-bg);
             color: var(--text-muted);
-            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            border-top: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
 
         .social-links {
@@ -603,10 +625,23 @@
             .book-grid {
                 grid-template-columns: 1fr;
             }
+
+            .theme-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+    </button>
+
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
@@ -733,6 +768,34 @@
     </footer>
 
     <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? '' : 'light';
+            const icon = document.getElementById('theme-icon');
+            
+            if (newTheme === 'light') {
+                html.setAttribute('data-theme', 'light');
+                icon.textContent = '🌙';  // Show moon when in light mode (to switch back to dark)
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.removeAttribute('data-theme');
+                icon.textContent = '☀️';  // Show sun when in dark mode (to switch to light)
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme');
+        const icon = document.getElementById('theme-icon');
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            icon.textContent = '🌙';  // Show moon when in light mode
+        } else {
+            icon.textContent = '☀️';  // Show sun when in dark mode
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -780,10 +843,10 @@
             const currentScroll = window.pageYOffset;
             
             if (currentScroll > 100) {
-                nav.style.background = 'rgba(26, 31, 46, 0.98)';
+                nav.style.background = 'var(--nav-bg-scrolled)';
                 nav.style.padding = '15px 40px';
             } else {
-                nav.style.background = 'rgba(26, 31, 46, 0.95)';
+                nav.style.background = 'var(--nav-bg)';
                 nav.style.padding = '20px 40px';
             }
             
