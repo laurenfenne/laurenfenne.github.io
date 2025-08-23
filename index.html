@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lauren Fenne | Fantasy Author & Poet</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="fav.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="LF.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="LF.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="LF.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="LF.png">
     
     <style>
         * {
@@ -452,23 +452,21 @@
         }
 
         .about-image {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-blue));
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             position: relative;
             margin: 0 auto;
+            overflow: hidden;
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 8px 30px rgba(212, 165, 116, 0.3);
         }
 
-        .about-image::after {
-            content: 'LF';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 72px;
-            color: white;
-            font-weight: bold;
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .about-text {
@@ -704,11 +702,13 @@
     <section id="about">
         <h2 class="section-title">About</h2>
         <div class="about-content">
-            <div class="about-image"></div>
+            <div class="about-image">
+                <img src="images/loz.jpg" alt="Lauren Fenne">
+            </div>
             <div class="about-text">
                 <p>Lauren Fenne is a fantasy author and poet based in Melbourne, Australia. Her work explores the intersection of music and magic, weaving tales where forbidden songs hold the power to reshape reality and silence speaks louder than words.</p>
                 <p>Her debut trilogy, Hymn for the Lost, follows those who dare to sing in a world where music has been weaponized and controlled. Through her poetry collection, The Architecture of Absence, she maps the emotional geography of loss, love, and the spaces between.</p>
-                <p>When not crafting worlds where song becomes rebellion, Lauren can be found exploring Melbourne's hidden laneways, always listening for the stories that hide in the quiet moments.</p>
+                <p>When not lost in her writing, Lauren is usually outdoors, chasing sunrises and always listening for the stories that hide in the quiet moments of long runs. </p>
             </div>
         </div>
     </section>
@@ -761,7 +761,6 @@
             <a href="#">Twitter</a>
             <a href="#">Instagram</a>
             <a href="#">Goodreads</a>
-            <a href="mailto:lauren.fenne@gmail.com">Email</a>
         </div>
         <p>&copy; 2025 Lauren Fenne. All rights reserved.</p>
         <p style="margin-top: 10px; font-size: 14px;">Website crafted with the resonance of forbidden songs</p>
